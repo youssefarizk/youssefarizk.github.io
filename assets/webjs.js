@@ -52,15 +52,16 @@ function sayHello(){
 var testing = document.getElementById('test');
 
 var dict = [];
-var all = [];
-var vid =[];
 
+var user=document.getElementById('field1');
 function write_rate(valued) {
   dict.push({
-      rate:valued.value,
-      time: player.getCurrentTime(),
-      picuri: picURL
-  });
+    username:user.value,
+    movieId:vid,
+    rate:valued.value,
+    time: player.getCurrentTime(),
+    picuri: picURL
+  })
   dataAcc += String(player.getCurrentTime())+ ", " +valued.value + "\n";
   g2 = new Dygraph(
     document.getElementById("graphdiv2"),
@@ -70,18 +71,16 @@ function write_rate(valued) {
 
 function onPlayerStateChange(event) {
     if(event.data === 0) {
-      all = [
-        {user},
-        vid,
-        dict
-      ];
-      str = JSON.stringify(all, null, 4);
+
+downloadCSV({ filename: "data.csv" });
+
+      str = JSON.stringify(dict, null, 4);
         console.log(str); // Logs output to dev tools console.
         //document.getElementById('test').innerHTML = (str); // Displays output using window.alert()
 
 
       $.ajax({
-          url: "http://requestb.in/wg5guxwg",
+          url: "https://requestb.in/137od0r1",
           type: "POST",
           data: str,
           dataType: "json",
@@ -103,43 +102,85 @@ function onPlayerStateChange(event) {
 }
 
 
+function convertArrayOfObjectsToCSV(args) {
+    var result, ctr, keys, columnDelimiter, lineDelimiter, data;
+
+    data = args.data || null;
+    if (data == null || !data.length) {
+        return null;
+    }
+
+    columnDelimiter = args.columnDelimiter || ',';
+    lineDelimiter = args.lineDelimiter || '\n';
+
+    keys = Object.keys(data[0]);
+
+    result = '';
+    result += keys.join(columnDelimiter);
+    result += lineDelimiter;
+
+    data.forEach(function(item) {
+        ctr = 0;
+        keys.forEach(function(key) {
+            if (ctr > 0) result += columnDelimiter;
+
+            result += item[key];
+            ctr++;
+        });
+        result += lineDelimiter;
+    });
+
+    return result;
+}
+
+function downloadCSV(args) {
+    var data, filename, link;
+
+    var csv = convertArrayOfObjectsToCSV({
+        data: dict
+    });
+    if (csv == null) return;
+
+    filename = args.filename || 'export.csv';
+
+    if (!csv.match(/^data:text\/csv/i)) {
+        csv = 'data:text/csv;charset=utf-8,' + csv;
+    }
+    data = encodeURI(csv);
+
+    link = document.createElement('a');
+    link.setAttribute('href', data);
+    link.setAttribute('download', filename);
+    link.click();
+}
+
 
 
 
 function vid1() {
-  player.loadVideoById({'videoId': 'bHQqvYy5KYo',
+  player.loadVideoById({'videoId': 'ZK3O402wf1c',
                  'suggestedQuality': 'default'});
-                 vid.push({
-                     vidname:"Movie a"
-                 });
+                 vid="Lec 1 MIT 18.06 Linear Algebra, Spring 2005";
 }
 function vid2() {
-  player.loadVideoById({'videoId': 'ddDvm7C1RMo',
+  player.loadVideoById({'videoId': 'mbyG85GZ0PI',
                  'suggestedQuality': 'default'});
-                 vid.push({
-                     vidname:"Movie b"
-                 });
+                 vid="Lecture 01 - The Learning Problem";
 }
 function vid3() {
-  player.loadVideoById({'videoId': 'W1BO6FUnI-8',
+  player.loadVideoById({'videoId': 'gv-AB35V2k8',
                  'suggestedQuality': 'default'});
-                 vid.push({
-                     vidname:"Movie c"
-                 })
+                 vid="Lec 1 | MIT 18.086 Mathematical Methods for Engineers II";
 }
 function vid4() {
-  player.loadVideoById({'videoId': 'TfS5J3gGQa4',
+  player.loadVideoById({'videoId': 'T_I-CUOc_bk',
                  'suggestedQuality': 'default'});
-                 vid.push({
-                     vidname:"Movie d"
-                 })
+                 vid="Big Picture: Derivatives";
 }
 function vid5() {
-  player.loadVideoById({'videoId': 'T8k0fYZ3uzU',
+  player.loadVideoById({'videoId': 'oo1ZZlvT2LQ',
                  'suggestedQuality': 'default'});
-                 vid.push({
-                     vidname:"Movie e"
-                 })
+                 vid="The Exponential Function";
 }
 
 /* GET JSON FROM THE WEB, STORE IT TO A VARIABLE AND PASS IT TO HTML
@@ -328,9 +369,6 @@ ourRequest.send();
 
       var data = canvas.toDataURL('image/png');
       picURL = data;
-      fetch(picURL)
-      .then(res => res.blob())
-      .then(blob => alert(blob))
       photo.setAttribute('src', data);
     } else {
       clearphoto();

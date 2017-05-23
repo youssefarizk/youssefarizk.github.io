@@ -5,38 +5,38 @@
   padding: 0;
   font-weight: 300;
 }
-body {
+body1 {
   font-family: 'Source Sans Pro', sans-serif;
   color: white;
   font-weight: 300;
 }
-body ::-webkit-input-placeholder {
+body1 ::-webkit-input-placeholder {
   /* WebKit browsers */
   font-family: 'Source Sans Pro', sans-serif;
   color: white;
   font-weight: 300;
 }
-body :-moz-placeholder {
+body1 :-moz-placeholder {
   /* Mozilla Firefox 4 to 18 */
   font-family: 'Source Sans Pro', sans-serif;
   color: white;
   opacity: 1;
   font-weight: 300;
 }
-body ::-moz-placeholder {
+body1 ::-moz-placeholder {
   /* Mozilla Firefox 19+ */
   font-family: 'Source Sans Pro', sans-serif;
   color: white;
   opacity: 1;
   font-weight: 300;
 }
-body :-ms-input-placeholder {
+body1 :-ms-input-placeholder {
   /* Internet Explorer 10+ */
   font-family: 'Source Sans Pro', sans-serif;
   color: white;
   font-weight: 300;
 }
-.wrapper {
+.wrapper1 {
   background: #50a3a2;
   background: -webkit-linear-gradient(top left, #50a3a2 0%, #53e3a6 100%);
   background: linear-gradient(to bottom right, #50a3a2 0%, #53e3a6 100%);
@@ -48,18 +48,18 @@ body :-ms-input-placeholder {
   margin-top: -200px;
   overflow: hidden;
 }
-.wrapper.form-success .container h1 {
+.wrapper1.form1-success .container1 h1 {
   -webkit-transform: translateY(85px);
           transform: translateY(85px);
 }
-.container {
+.container1 {
   max-width: 600px;
   margin: 0 auto;
   padding: 80px 0;
   height: 400px;
   text-align: center;
 }
-.container h1 {
+.container1 h1 {
   font-size: 40px;
   -webkit-transition-duration: 1s;
           transition-duration: 1s;
@@ -67,6 +67,7 @@ body :-ms-input-placeholder {
           transition-timing-function: ease-in-put;
   font-weight: 200;
 }
+
 form {
   padding: 20px 0;
   position: relative;
@@ -99,7 +100,7 @@ form input:focus {
   width: 300px;
   color: #53e3a6;
 }
-form button {
+form button1 {
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
@@ -115,7 +116,7 @@ form button {
   -webkit-transition-duration: 0.25s;
           transition-duration: 0.25s;
 }
-form button:hover {
+form button1:hover {
   background-color: #f5f7f9;
 }
 .bg-bubbles {
