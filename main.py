@@ -85,15 +85,16 @@ def hello_world():
           json = None
           params = None
 
-         # resultAPI = processRequest( json, data, headers, params )
-          data_out.anger=0
-          data_out.contempt=0
-          data_out.disgust=0
-          data_out.fear=0
-          data_out.happiness=0
-          data_out.neutral=0
-          data_out.sadness=0
-          data_out.surprise=0
+          resultAPI = processRequest( json, data, headers, params )
+          data_out.anger=resultAPI[0]['scores']['anger']
+          data_out.contempt=resultAPI[0]['scores']['contempt']
+          data_out.disgust=resultAPI[0]['scores']['disgust']
+          data_out.fear=resultAPI[0]['scores']['fear']
+          data_out.happiness=resultAPI[0]['scores']['happiness']
+          data_out.neutral=resultAPI[0]['scores']['neutral']
+          data_out.sadness=resultAPI[0]['scores']['sadness']
+          data_out.surprise=resultAPI[0]['scores']['surprise']
+          
           
     table_service.create_table('DataForML')
     table_service.insert_or_replace_entity('DataForML', data_out)
