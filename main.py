@@ -96,7 +96,7 @@ def hello_world():
           data_out.surprise=resultAPI[0]['scores']['surprise']
           
           
-          table_service.create_table('DataForML')
+          #table_service.create_table('DataForML')
           table_service.insert_or_replace_entity('DataForML', data_out)
 
     return 'Uploaded'
