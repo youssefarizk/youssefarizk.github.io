@@ -96,7 +96,7 @@ def hello_world():
           data_out.surprise=0
           
     table_service.create_table('DataForML')
-   # table_service.insert_or_replace_entity('DataForML', data_out)
+    table_service.insert_or_replace_entity('DataForML', data_out)
     return 'Uploaded'
   
   else:
