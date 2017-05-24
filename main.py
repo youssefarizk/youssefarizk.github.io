@@ -69,40 +69,36 @@ app = Flask(__name__)
 def hello_world():
   if request.method == 'POST':
     json_dict = request.get_json(True)[1:]
-    data_out=Entity()
-    data_out.PartitionKey = 'FUCKIT'
-    data_out.movieID = 'THIS'
-    data_out.rate='SHIT'
-    data_out.RowKey=14986
-    # for dics in json_dict:
-    #       data_out=Entity()
-    #       data_out.PartitionKey = dics['username']
-    #       data_out.movieID = dics['movieId']
-    #       data_out.rate=dics["rate"]
-    #       data_out.RowKey=dics["time"]
-    #       toDelete=len('data:image/jpeg;base64,')-1
-    #       pic64=dics["picuri"][toDelete:]
-    #       data=pic64.decode('base64')
-    #       headers = dict()
-    #       headers['Ocp-Apim-Subscription-Key'] = _key
-    #       headers['Content-Type'] = 'application/octet-stream'
+    
+    for dics in json_dict:
+          data_out=Entity()
+          data_out.PartitionKey = dics['username']
+          data_out.movieID = dics['movieId']
+          data_out.rate=dics["rate"]
+          data_out.RowKey=dics["time"]
+          toDelete=len('data:image/jpeg;base64,')-1
+          pic64=dics["picuri"][toDelete:]
+          data=pic64.decode('base64')
+          headers = dict()
+          headers['Ocp-Apim-Subscription-Key'] = _key
+          headers['Content-Type'] = 'application/octet-stream'
 
-    #       json = None
-    #       params = None
+          json = None
+          params = None
 
-    #       resultAPI = processRequest( json, data, headers, params )
-    #       data_out.anger=resultAPI[0]['scores']['anger']
-    #       data_out.contempt=resultAPI[0]['scores']['contempt']
-    #       data_out.disgust=resultAPI[0]['scores']['disgust']
-    #       data_out.fear=resultAPI[0]['scores']['fear']
-    #       data_out.happiness=resultAPI[0]['scores']['happiness']
-    #       data_out.neutral=resultAPI[0]['scores']['neutral']
-    #       data_out.sadness=resultAPI[0]['scores']['sadness']
-    #       data_out.surprise=resultAPI[0]['scores']['surprise']
+          resultAPI = processRequest( json, data, headers, params )
+          data_out.anger=resultAPI[0]['scores']['anger']
+          data_out.contempt=resultAPI[0]['scores']['contempt']
+          data_out.disgust=resultAPI[0]['scores']['disgust']
+          data_out.fear=resultAPI[0]['scores']['fear']
+          data_out.happiness=resultAPI[0]['scores']['happiness']
+          data_out.neutral=resultAPI[0]['scores']['neutral']
+          data_out.sadness=resultAPI[0]['scores']['sadness']
+          data_out.surprise=resultAPI[0]['scores']['surprise']
           
           
-    table_service.create_table('DataForML')
-    table_service.insert_or_replace_entity('DataForML', data_out)
+          table_service.create_table('DataForML')
+          table_service.insert_or_replace_entity('DataForML', data_out)
 
     return 'Uploaded'
   
