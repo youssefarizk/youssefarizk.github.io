@@ -1,4 +1,5 @@
 from flask import Flask, request, render_template, json
+import time
 import requests
 import azure.common
 from azure.storage import CloudStorageAccount
