@@ -4,9 +4,8 @@
       <div id="loginpage"> // login page
         <head>
           <meta charset="UTF-8">
-          <script type="text/javascript" src="assets/webjs.js"></script>
-          <link rel="stylesheet" href="assets/style.css"/>
           <script type="text/javascript" src="assets/pages.js"></script>
+          <link rel="stylesheet" href="assets/style.css"/>
         </head>
         <body1>
           <div class="wrapper1">
@@ -14,7 +13,8 @@
             <h1>Welcome</h1>
             <form class="form"  >
               <input type="text" id="field1" name="field1" placeholder="Username" />
-              <input type="submit" value="Send" name="login" id="loginbutton" onclick="return show1('videopage','loginpage');"></input>
+              <input type="submit" value="Login as User" name="login" id="loginbutton1" onclick="return show1('videopage','loginpage','graphdiv2','graphp');"></input>
+              <input type="submit" value="Login as Provider" name="login" id="loginbutton" onclick="return show1('videopage','loginpage','loginpage','loginpage');"></input>
             </form>
 
           </div>
@@ -41,22 +41,23 @@
 
       <div id="videopage" style="display:none"> // Video page
         <head>
-
-
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="keywords" content="" />
         <meta name="description" content="" />
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-        <script type="text/javascript" src="assets/webjs.js"></script>
+        <script type="text/javascript" src="assets/json.js"></script>
         <script type="text/javascript" src="assets/graph.js"></script>
         <script type="text/javascript" src="assets/pages.js"></script>
+        <script type="text/javascript" src="assets/youtube.js"></script>
+        <script type="text/javascript" src="assets/takephoto.js"></script>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700|Archivo+Narrow:400,700" rel="stylesheet" type="text/css"/>
-        <link href="assets/default.css" rel="stylesheet" type="text/css" media="all" />
-        <link rel="stylesheet" src="assets/graph.css" />
-        <link rel="stylesheet" href="assets/button.css"/>
-        </head>
+        <link rel="stylesheet" href="assets/default.css" type="text/css" media="all" />
+        <link rel="stylesheet" src="assets/graph.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="assets/button.css" type="text/css" media="all" />
+      </head>
         <body>
-          <h2>Hello!</h2>
+
+          <h2>Hello! version 3</h2>
         <div id="logo" class="container">
         	<h1><a href="#">Emotional Engagement</a></h1>
         </div>
@@ -66,9 +67,9 @@
 <!--        			<li><a href="indexlog.html">Homepage</a></li>
         			<li class="current_page_item"><a href="Video.html">Video</a></li>
         			<li><a href="Graph.html">Garphical Result</a></li> -->
-              <li><a onclick="return show1('homepage','videopage');">HOMEPAGE</a></li>
+              <li><a onclick="return show1('homepage','videopage','videopage','videopage');">HOMEPAGE</a></li>
               <li><a class="current_page_item">VIDEO</a></li>
-              <li><a onclick="return show1('graphpage','videopage');">GRAPHICAL RESULT</a></li>
+              <li><a id="graphp" onclick="return show1('graphpage','videopage','videopage','videopage');">GRAPHICAL RESULT</a></li>
 
 
         		</ul>
@@ -81,11 +82,11 @@
         		<div class="entry">
 
 
-        			<button class="button" onclick="vid1()">Video1</button>
-        			<button class="button" onclick="vid2()">Video2</button>
-        			<button class="button" onclick="vid3()">Video3</button>
-        			<button class="button" onclick="vid4()">Video4</button>
-        			<button class="button" onclick="vid5()">Video5</button>
+        			<button id=video1 class="button" onclick="vid1()">Video1</button>
+        			<button id=video2 class="button" onclick="vid2()">Video2</button>
+        			<button id=video3 class="button" onclick="vid3()">Video3</button>
+        			<button id=video4 class="button" onclick="vid4()">Video4</button>
+        			<button id=video5 class="button" onclick="vid5()">Video5</button>
               <br/>
               <br/>
               <br/>
@@ -93,14 +94,11 @@
             <div id="player"></div>
             <div class="camera">
               <video id="video" hidden>Video stream not available.</video>
-              <button1 id="startbutton" hidden>Take photo</button1>
             </div>
             <p>
             	<br/>
             	<font size="5">How engaged are you?
-
             </p>
-
     <!--     <script language="JavaScript">
               function processForm()
               {
@@ -112,11 +110,8 @@
               processForm();
             </script>-->
 
-
-
-
-
             <br/>
+            <button1 class="button" id=objButton0 value="0"></button1>
             <button class="button" id=objButton1 value="1">Unengaged</button>
             <button class="button" id=objButton2 value="2">Slightly Unengaged</button>
             <button class="button" id=objButton3 value="3">Neutral</button>
@@ -124,6 +119,32 @@
             <button class="button" id=objButton5 value="5">Engaged</button>
             <br/>
             <br/>
+            <!-- <script>
+            window.onbeforeunload=function(){
+            //  downloadCSV({ filename: "data.csv" });
+              str = JSON.stringify(dict, null, 4);
+                console.log(str); // Logs output to dev tools console.
+                //document.getElementById('test').innerHTML = (str); // Displays output using window.alert()
+              $.ajax({
+                  type: "POST",
+                  url: "http://projectemotion.azurewebsites.net/",
+                  data: str,
+                  dataType: "json",
+                  success: function (result) {
+                      switch (result) {
+                          case true:
+                              processResponse(result);
+                              break;
+                          default:
+                              resultDiv.html(result);
+                      }
+                  },
+                  error: function (xhr, ajaxOptions, thrownError) {
+                  alert(xhr.status);
+                  }
+              });
+            }
+            </script> -->
             <br/>
             <canvas id="canvas"></canvas>
             <br/>
@@ -140,7 +161,6 @@
         	</div>
         	</div>
         </div>
-
         </body>
       </div>
 
@@ -155,12 +175,11 @@
         <div id="menu" class="container">
           <ul>
             <li><a class="current_page_item">HOMEPAGE</a></li>
-            <li><a onclick="return show1('videopage','homepage');">VIDEO</a></li>
-            <li><a onclick="return show1('graphpage','homepage');">GRAPHICAL RESULT</a></li>
+            <li><a onclick="return show1('videopage','homepage','homepage','homepage');">VIDEO</a></li>
+            <li><a id="graphp" onclick="return show1('graphpage','homepage','homepage','homepage');">GRAPHICAL RESULT</a></li>
           </ul>
         </div>
       </div>
-
     </div>
 
     <div id="graphpage" style="display:none"> // Video page
@@ -172,12 +191,11 @@
       <div id="menu-wrapper">
         <div id="menu" class="container">
           <ul>
-            <li><a onclick="return show1('homepage','graphpage');">HOMEPAGE</a></li>
-            <li><a onclick="return show1('videopage','graphpage');">VIDEO</a></li>
+            <li><a onclick="return show1('homepage','graphpage','graphpage','graphpage');">HOMEPAGE</a></li>
+            <li><a onclick="return show1('videopage','graphpage','graphpage','graphpage');">VIDEO</a></li>
             <li><a class="current_page_item">GRAPHICAL RESULT</a></li>
           </ul>
         </div>
       </div>
-
     </div>
 </html>
